@@ -1,0 +1,35 @@
+syntax = "proto3";
+
+package com.buleualexandru.assignment1.grpc;
+
+option java_multiple_files = true;
+option java_package = "com.buleualexandru.assignment1.grpc";
+
+
+
+message ChatMessage {
+  string id = 1;
+  string message = 2;
+}
+
+
+message Subscription {
+  string id = 1;
+}
+
+//message nothing {}
+
+service ChatService {
+
+  rpc subscribeToChat(Subscription) returns(stream ChatMessage);
+  rpc unsubscribeFromChat(Subscription) returns(ChatMessage);
+  rpc sendMessage(ChatMessage) returns (ChatMessage);
+}
+
+/*
+service ChatService {
+  rpc join(User) returns (JoinResponse) {}
+  rpc sendMsg(ChatMessage) returns (Empty) {}
+  rpc receiveMsg(Empty) returns (stream ChatMessage) {}
+  rpc getAllUsers(Empty) returns (UserList) {}
+}*/
